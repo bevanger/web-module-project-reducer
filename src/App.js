@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import reducer, { initialState } from './reducers';
-import { addOne, applyNumber, changeOperation, clearDisplay, setMemory } from './actions';
+import {  addOne, applyNumber, changeOperation, clearDisplay, setMemory, addMemory, clearMemory } from './actions';
 
 import './App.css';
 
@@ -26,8 +26,16 @@ function App() {
     dispatch(clearDisplay());
   }
 
-  const handleSetMemoryClick = (input) => {
-    dispatch(setMemory(input));
+  const handleSetMemoryClick = (number) => {
+    dispatch(setMemory(number));
+  }
+
+  const handleAddMemoryClick = (number) => {
+    dispatch(addMemory(number));
+  }
+
+  const handleClearMemoryClick = () => {
+    dispatch(clearMemory());
   }
   //console.log(state);
 
@@ -49,8 +57,8 @@ function App() {
             
             <div className="row">
               <CalcButton onClick={() => {handleSetMemoryClick()}} value= {"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton onClick={() => {handleAddMemoryClick()}} value={"MR"}/>
+              <CalcButton onClick={() => {handleClearMemoryClick()}} value={"MC"}/>
             </div>
 
             <div className="row">
@@ -78,7 +86,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton onClick={() => {handleClearClick(0)}} value={"CE"}/>
+              <CalcButton onClick={() => {handleClearClick()}} value={"CE"}/>
             </div>
 
           </form>
